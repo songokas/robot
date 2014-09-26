@@ -5,7 +5,7 @@
 
 ### PROJECT_DIR
 ### This is the path to where you have created/cloned your project
-PROJECT_DIR       = /home/tomas/sketchbook/robotas/
+PROJECT_DIR       = /home/tomas/sketchbook/robotas
 ### AVR_GCC_VERSION
 ### Check if the version is equal or higher than 4.9
 AVR_GCC_VERSION  := $(shell expr `avr-gcc -dumpversion | cut -f1` \>= 4.9)
@@ -28,7 +28,7 @@ BOARD_TAG         = uno
 
 ### MONITOR_BAUDRATE
 ### It must be set to Serial baudrate value you are using.
-MONITOR_BAUDRATE  = 115200
+MONITOR_BAUDRATE  = 9600
 
 ### AVR_TOOLS_DIR
 ### Path to the AVR tools directory such as avr-gcc, avr-g++, etc.

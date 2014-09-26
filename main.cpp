@@ -14,7 +14,7 @@ const unsigned int DISTANCE_TO_OBSTICLE = 20;
 int main()
 {
     NewPing forwardSonar(10, 11, SENSOR_MAX_RANGE);
-    Engine engine(6, 7, 8, 9);
+    DualEngine engine(6, 7, 8, 9);
     Robot robot(engine, forwardSonar);
     while (true) {
         if (robot.hasObsticle(DISTANCE_TO_OBSTICLE)) {
