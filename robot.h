@@ -1,16 +1,21 @@
 #ifndef ROBOT_H
 #define ROBOT_H
 
+#include "motor.h"
+#include "direction_control.h"
+
+class Speed;
+
 class Robot
 {
   public:
-    Robot(const Engine & engine, const NewPing & forwardSonar);
-    bool hasObsticle(int distance);
-    void moveForward(int speed);
-    void moveRight(int speed);
+    Robot(const Motor & motorA, const Motor & motorB, const DirectionControl & directionControl);
+    void run(const Speed & speed);
+    void turnAround(int degrees, const Speed & speed);
   private:
-    Engine engine;
-    NewPing forwardSonar;
+    Motor motorA;
+    Motor motorB;
+    DirectionControl directionControl;
 };
 
 #endif

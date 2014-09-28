@@ -1,23 +1,22 @@
-#include <NewPing.h>
-#include "engine.h"
 #include "robot.h"
 
-Robot::Robot(const Engine & engine, const NewPing & forwardSonar)
-  :engine(engine), forwardSonar(forwardSonar) 
+#include <Arduino.h>
+
+Robot::Robot(const Motor & motorA, const Motor & motorB, const DirectionControl & directionControl)
+  :motorA(motorA), motorB(motorB), directionControl(directionControl) 
 {}
 
-void Robot::moveForward(int speed)
+void Robot::run(const Speed & speed)
 {
-    engine.leftRightForward(speed);
+    motorA.forward(directionControl.getLeftSpeed(speed));
+    motorB.forward(directionControl.getRightSpeed(speed));
 }
 
-void Robot::moveRight(int speed)
+//@TODO degrees
+void Robot::turnAround(int degrees, const Speed & speed)
 {
-    engine.leftForward(speed);
+    motorA.backward(speed);
+    motorB.forward(speed);
+    delay(200);
 }
 
-bool Robot::hasObsticle(int distance)
-{
-    int toObsticle = forwardSonar.ping() / US_ROUNDTRIP_CM;
-    return toObsticle < distance;
-}
