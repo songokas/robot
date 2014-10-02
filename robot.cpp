@@ -1,5 +1,5 @@
 #include "robot.h"
-
+#include "speed.h"
 #include <Arduino.h>
 
 Robot::Robot(const Motor & motorA, const Motor & motorB, const DirectionControl & directionControl)
