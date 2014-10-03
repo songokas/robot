@@ -1,9 +1,8 @@
 #ifndef RADAR_H
 #define RADAR_H 
 
-//@TODO makefile should load it without paths
-#include "libs/Servo.h"
-#include "libs/NewPing.h"
+#include <Servo.h>
+#include <NewPing.h>
 
 class Radar
 {

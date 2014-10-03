@@ -7,29 +7,36 @@
 
 // distance specified in cm
 const unsigned int SENSOR_MAX_RANGE = 200;
+const unsigned int BAUD_RATE = 9600;
 
-const unsigned int SPEED_SLOW = 50;
-const unsigned int SPEED_FAST = 250;
-
-const unsigned int DISTANCE_TO_OBSTICLE = 20;
-
-int main()
+void setup()
 {
-    NewPing sonar(10, 11, SENSOR_MAX_RANGE);
+    Serial.begin(BAUD_RATE);
     Servo servo;
     servo.attach(12);
+    NewPing sonar(11, 10, SENSOR_MAX_RANGE);
     Radar radar(sonar, servo);
     DirectionControl directionControl(radar);
-    Motor motorA(6, 7);
-    Motor motorB(8, 9);
+    Motor motorA(6, 7, 3);
+    Motor motorB(8, 9, 5);
     Robot robot(motorA, motorB, directionControl);
     while (true) {
         //if (!directionControl.canMoveForward()) {
             //robot.turn(Speed(20));
         //}
         //else {
-            robot.run(Speed(40));
+            robot.run(Speed(70));
         //}
         delay(100);
     }
 }
+
+void loop()
+{
+}
+
+//unable to overide this using setup as main
+//int main(void)
+//{
+
+//} 

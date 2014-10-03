@@ -28,8 +28,18 @@ bool Radar::hasRighObsticle()
 
 bool Radar::hasObsticle()
 {
+    delay(200);
     int distance = getDistance();
-    if (distance > 50) {
+    Serial.print("Distance to target: ");
+    Serial.print(distance);
+    Serial.print("Angle: ");
+    Serial.println(engine.read());
+
+    //distance 0 means unable to get distance
+    if (distance == 0) {
+        return false;
+    }
+    if (distance < 50) {
         return true;
     }
     return false;

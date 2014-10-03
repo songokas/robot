@@ -7,11 +7,12 @@ class Motor
 {
   public:
 
-    Motor(int directionPin, int speedPin);
+    Motor(int directionPin1, int directionPin2, int speedPin);
     void forward(const Speed & speed);
     void backward(const Speed & speed);
   private:
-    const int directionPin;
+    const int directionPin1;
+    const int directionPin2;
     const int speedPin;
 };
 
