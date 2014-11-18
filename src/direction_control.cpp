@@ -1,25 +1,29 @@
 #include "direction_control.h"
-#include "speed.h"
 
 DirectionControl::DirectionControl(const Radar & radar): radar(radar)
 {}
 
-const Speed DirectionControl::getLeftSpeed(const Speed & speed)
+int DirectionControl::getFrontDistance()
 {
-    if (radar.hasFrontObsticle()) {
-        if (!radar.hasRighObsticle() && radar.hasLeftObsticle()) {
-            return speed + Speed(15);
-        }
-    }
-    return speed;
+    return radar.getFrontDistance();
 }
 
-const Speed DirectionControl::getRightSpeed(const Speed & speed)
+int DirectionControl::getRightDistance()
 {
-    if (radar.hasFrontObsticle()) {
-        if (!radar.hasLeftObsticle() && radar.hasRighObsticle()) {
-            return speed + Speed(15);
-        }
-    }
-    return speed;
+    return radar.getRightDistance();
+}
+
+int DirectionControl::getLeftDistance()
+{
+    return radar.getLeftDistance();
+}
+
+void DirectionControl::setInterval(int interval)
+{
+    radar.setInterval(interval);
+}
+ 
+void DirectionControl::run()
+{
+    if (radar.shouldRun()) radar.run();
 }

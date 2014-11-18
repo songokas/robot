@@ -13,26 +13,27 @@ void setup()
 {
     Serial.begin(BAUD_RATE);
     Servo servo;
-    servo.attach(12);
-    NewPing sonar(11, 10, SENSOR_MAX_RANGE);
+    servo.attach(9);
+    servo.write(90);
+    NewPing sonar(10, 11, SENSOR_MAX_RANGE);
     Radar radar(sonar, servo);
-    DirectionControl directionControl(radar);
-    Motor motorA(6, 7, 3);
-    Motor motorB(8, 9, 5);
-    Robot robot(motorA, motorB, directionControl);
-    while (true) {
-        //if (!directionControl.canMoveForward()) {
-            //robot.turn(Speed(20));
-        //}
-        //else {
-            robot.run(Speed(70));
-        //}
-        delay(100);
-    }
+    Sound sound(12);
+    SoundPlayer soundPlayer(sound, radar);
+    //DirectionControl directionControl(radar);
+    Motor motorA(4, 5, 3);
+    Motor motorB(7, 8, 6);
+    Display display;
+    Robot robot(motorA, motorB, radar, soundPlayer, display);
+    robot.run(Speed(95));
 }
 
 void loop()
 {
+    //Serial.print("left: ");
+    //Serial.print(analogRead(A1));
+    //Serial.print(" right: ");
+    //Serial.println(analogRead(A0));
+    //delay(1000);
 }
 
 //unable to overide this using setup as main

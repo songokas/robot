@@ -3,14 +3,15 @@
 
 #include "radar.h"
 
-class Speed;
-
 class DirectionControl
 {
     public:
         DirectionControl(const Radar & radar);
-        const Speed getLeftSpeed(const Speed & speed);
-        const Speed getRightSpeed(const Speed & speed);
+        int getFrontDistance();
+        int getRightDistance();
+        int getLeftDistance();
+        void setInterval(int interval);
+        void run();
     private:
         Radar radar;
 };
