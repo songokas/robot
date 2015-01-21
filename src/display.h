@@ -6,11 +6,14 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
+class Radar;
+
 class Display
 {
 public:
     Display();
     void print(const char * message);
+    void print(const Radar & radar);
 private:
     Adafruit_SSD1306 screen;
 };

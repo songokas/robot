@@ -1,4 +1,5 @@
 #include "display.h"
+#include "radar.h"
 
 #include <Arduino.h>
 
@@ -10,18 +11,29 @@ Display::Display(): screen(OLED_RESET)
     screen.display();
     delay(1000);
     screen.clearDisplay();
-    //screen.println("testing message");
-    //screen.display();
-    //delay(1000);
-
 }
 
 void Display::print(const char * message)
 {
+    screen.clearDisplay();
     screen.setTextSize(2);
     screen.setTextColor(WHITE);
     screen.setCursor(0,0);
     screen.println(message);
     screen.display();
+}
+
+void Display::print(const Radar & radar)
+{
     screen.clearDisplay();
+    screen.setTextSize(2);
+    screen.setTextColor(WHITE);
+    screen.setCursor(0,0);
+    screen.print("Front:");
+    screen.println(radar.getFrontDistance());
+    screen.print("Left:");
+    screen.println(radar.getLeftDistance());
+    screen.print("Right:");
+    screen.println(radar.getRightDistance());
+    screen.display();
 }

@@ -6,7 +6,7 @@
 #include "sound_player.h"
 #include "display.h"
 
-#define DISTANCE_ARRAY 10
+#define DISTANCE_ARRAY 20
 
 class Speed;
 
@@ -16,21 +16,24 @@ class Robot
     Robot(const Motor & motorA, const Motor & motorB, Radar & radar, SoundPlayer & soundPlayer, Display & display);
     void run(const Speed & speed);
     void turnAround(int degrees, const Speed & speed);
-    void moveForward(const Speed & speed);
-    void moveBackward(const Speed & speed);
-    void moveLeft(const Speed & speed);
-    void moveRight(const Speed & speed);
-    void moveLeftBack(const Speed & speed);
-    void moveRightBack(const Speed & speed);
+    void moveForward(const Speed & speed, int time);
+    void moveBackward(const Speed & speed, int time);
+    void moveLeft(const Speed & speed, int time);
+    void moveRight(const Speed & speed, int time);
+    void moveLeftBack(const Speed & speed, int time);
+    void moveRightBack(const Speed & speed, int time);
     void off();
     enum State {
         MovingBack, MovingFront, Off, Stuck
     };
 
-    void measurePath(int distance);
     bool isStuck() const;
   private:
     void move(const Speed & speed);
+    void measurePath(int distance);
+    void recordTime(int time);
+    bool isMovingForRequiredTime();
+
     Motor motorA;
     Motor motorB;
     Radar & radar;
@@ -39,6 +42,7 @@ class Robot
     State state;
     int distances[DISTANCE_ARRAY];
     byte index;
+    unsigned long moveUntil;
 };
 
 #endif

@@ -12,14 +12,16 @@ const unsigned int BAUD_RATE = 9600;
 void setup()
 {
     Serial.begin(BAUD_RATE);
+
     Servo servo;
     servo.attach(9);
     servo.write(90);
-    NewPing sonar(10, 11, SENSOR_MAX_RANGE);
-    Radar radar(sonar, servo);
-    Sound sound(12);
+    NewPing leftSonar(9, 10, SENSOR_MAX_RANGE);
+    NewPing middleSonar(11, 12, SENSOR_MAX_RANGE);
+    NewPing rightSonar(1, 2, SENSOR_MAX_RANGE);
+    Radar radar(leftSonar, middleSonar, rightSonar);
+    Sound sound(13);
     SoundPlayer soundPlayer(sound, radar);
-    //DirectionControl directionControl(radar);
     Motor motorA(4, 5, 3);
     Motor motorB(7, 8, 6);
     Display display;
